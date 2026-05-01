@@ -531,3 +531,21 @@ footer {
     .project-ascii { font-size: 0.32rem; }
     .carousel-track img { width: 100%; }
 }
+
+/* Style for the small unique name ASCII */
+.name-ascii {
+    font-size: 0.28rem; /* Keeps it small */
+    line-height: 1;
+    margin-bottom: 15px;
+    color: #111111;
+    white-space: pre;
+    overflow-x: hidden; /* Prevents unwanted scrollbars */
+    user-select: none;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .name-ascii {
+        font-size: 0.15rem; /* Shrinks even further on mobile */
+    }
+}
