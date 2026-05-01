@@ -1,0 +1,533 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ffffff;
+    color: #111111;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.6;
+    width: 100%; 
+    padding: 80px 5vw 40px; /* Added top padding to account for fixed header */
+    overflow-x: hidden;
+}
+
+/* Typography & Links */
+h1, h2, h3 {
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: lowercase;
+}
+
+p {
+    margin-bottom: 15px;
+    max-width: 1200px; 
+}
+
+a {
+    color: #111111;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    background-color: #111111;
+    color: #ffffff;
+}
+
+/* --- STYLISH TOP NAVIGATION --- */
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #111111;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5vw;
+    z-index: 1000;
+    box-shadow: 0 4px 0px rgba(0,0,0,0.1);
+}
+
+.nav-brand {
+    font-weight: bold;
+    font-size: 1.1rem;
+    overflow: hidden; /* Extra safety to prevent container scroll */
+}
+
+/* Fix for the top nav logo background */
+.nav-brand a {
+    display: block;
+    background: transparent !important;
+    overflow: hidden;
+}
+
+.nav-brand a:hover {
+    background: transparent !important;
+}
+
+/* Make the ASCII act like a small, uncopyable image with no scrollbars */
+.nav-ascii {
+    margin: 0; 
+    padding: 0;
+    font-size: 0.22rem; /* Reduced significantly to make it much smaller */
+    line-height: 1.1; 
+    color: #e6c106;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre;
+    cursor: default;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none; /* Prevents highlighting and interaction */
+    overflow: hidden; /* Completely removes vertical and horizontal scrollbars */
+}
+
+.top-nav nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.top-nav nav ul li a {
+    color: #ffffff;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.top-nav nav ul li a:hover {
+    background-color: #ffffff;
+    color: #111111;
+    padding: 2px 5px;
+    border-radius: 2px;
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center;
+    min-height: 60vh;
+    margin-bottom: 80px;
+    margin-top: 40px;
+    width: 100%;
+    gap: 40px;
+}
+
+.hero-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 50%;
+}
+
+.hero-right {
+    flex: 1.2; 
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+    overflow: hidden; 
+    margin-left: -12vw; 
+}
+
+.tagline {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.8rem;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    color: #555555;
+}
+
+/* Interactive KOTAG ASCII */
+.ascii-art {
+    font-size: 0.8rem;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    cursor: crosshair;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.ascii-line {
+    display: block;
+    white-space: pre;
+}
+
+.char {
+    display: inline-block;
+    white-space: pre;
+    transition: transform 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
+    will-change: transform;
+}
+
+/* Static Creature ASCII */
+.creature-ascii {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95rem; 
+    font-weight: bold;
+    line-height: 1.1;
+    margin-bottom: 0;
+    white-space: pre;
+    color: #111111;
+    cursor: default;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.subtitle {
+    min-height: 1.6em;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+/* Sections */
+section {
+    margin-bottom: 80px;
+    width: 100%;
+}
+
+pre {
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre;
+    overflow-x: auto;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+/* Terminal Text Block Style */
+.terminal-block .block-content {
+    border-left: 4px solid #111111;
+    padding-left: 15px;
+}
+
+/* --- STYLISH PROJECT WINDOWS --- */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    width: 100%;
+    align-items: stretch;
+}
+
+.project-window {
+    border: 2px solid #111111;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    box-shadow: 8px 8px 0px #111111;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-window:hover {
+    transform: translateY(-5px) translateX(-5px);
+    box-shadow: 13px 13px 0px #111111;
+}
+
+.window-header {
+    background: #111111;
+    color: #ffffff;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #111111;
+}
+
+.window-header .dot {
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+    border-radius: 50%;
+    margin-right: 6px;
+    display: inline-block;
+}
+
+.window-title {
+    margin-left: 10px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.window-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.mt-auto { margin-top: auto; }
+.mt-2 { margin-top: 20px; }
+
+.project-ascii {
+    font-size: 0.5rem; 
+    margin-bottom: 15px;
+    color: #111111;
+    font-weight: bold;
+}
+
+.status-text {
+    font-style: italic;
+    color: #555555;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.feature-list {
+    list-style: none;
+    margin-bottom: 15px;
+    padding-left: 10px;
+}
+
+.feature-list li {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.release-link {
+    display: inline-block;
+    margin-top: 15px;
+    background: #111111;
+    color: #ffffff;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.release-link:hover {
+    background: #555555;
+    color: #ffffff;
+}
+
+/* Fix for transparent image links (like Uptodown button) */
+a.download-badge {
+    display: inline-block;
+    margin-top: 15px;
+    background: transparent !important;
+}
+
+a.download-badge:hover {
+    background: transparent !important;
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+}
+
+a.download-badge img {
+    height: 45px;
+    display: block;
+}
+
+/* --- IMAGE CAROUSEL (HARIAN) --- */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 350px; 
+    border: 1px dashed #111111;
+    overflow: hidden;
+    background: transparent;
+}
+
+.carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.carousel-track img {
+    width: 50%; 
+    height: 100%;
+    object-fit: contain; 
+    flex-shrink: 0;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease, transform 0.2s ease;
+    padding: 10px;
+    cursor: zoom-in; 
+}
+
+.carousel-track img:hover {
+    filter: grayscale(0%);
+    transform: scale(1.03);
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #111111;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.2rem;
+    z-index: 10;
+    opacity: 0.8;
+}
+
+.carousel-btn:hover {
+    opacity: 1;
+    background: #555555;
+}
+
+.prev-btn { left: 0; }
+.next-btn { right: 0; }
+
+/* --- MODAL / LIGHTBOX --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(17, 17, 17, 0.95); 
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 4px solid #111111; 
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 12px 12px 0px #000000; 
+}
+
+#modal-img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+.close-modal {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: monospace;
+    transition: color 0.2s ease;
+}
+
+.close-modal:hover {
+    color: #777777;
+}
+
+/* WIDE PULL SCREEN: Terminal Contact Section */
+.full-width-section {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 60px 5vw;
+    border-top: 2px dashed #111111;
+    border-bottom: 2px dashed #111111;
+    background-color: #ffffff;
+}
+
+.terminal-container {
+    width: 100%;
+}
+
+.terminal-window-contact {
+    border: 2px solid #111111;
+    margin-top: 20px;
+    background-color: #ffffff;
+    box-shadow: 8px 8px 0px #111111;
+}
+
+.terminal-header {
+    background-color: #111111;
+    color: #ffffff;
+    padding: 5px 15px;
+    font-weight: bold;
+}
+
+.terminal-body-content {
+    padding: 20px;
+    min-height: 150px;
+}
+
+.prompt {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.cursor {
+    animation: blink 1s step-end infinite;
+    font-weight: bold;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.hint {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    font-style: italic;
+    opacity: 0.7;
+}
+
+/* Footer */
+footer {
+    padding-top: 20px;
+    text-align: left;
+    font-size: 0.9rem;
+    margin-top: 40px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .hero-left { max-width: 100%; }
+    .hero-right {
+        margin-top: 40px;
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-nav {
+        flex-direction: column;
+        gap: 15px;
+        padding-bottom: 15px;
+    }
+    body { padding-top: 120px; }
+    .ascii-art { font-size: 0.5rem; }
+    .creature-ascii { font-size: 0.4rem; }
+    .project-ascii { font-size: 0.32rem; }
+    .carousel-track img { width: 100%; }
+}
