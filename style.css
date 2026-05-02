@@ -13,7 +13,6 @@ body {
     background-color: #ffffff;
     color: #111111;
     font-family: 'Courier New', Courier, monospace;
-    /* Reduced base font size slightly to fix "words seem big" on mobile */
     font-size: clamp(12px, 2.5vw, 16px); 
     width: 100%; 
     max-width: 100vw;
@@ -89,7 +88,6 @@ a:hover {
 /* Fixed Header Tabs (Nav Links) */
 .top-nav nav ul li a {
     color: #ffffff;
-    /* Shrunk header tabs specifically for mobile */
     font-size: clamp(0.65rem, 1.5vw, 0.95rem); 
     transition: color 0.2s;
     white-space: nowrap;
@@ -103,12 +101,22 @@ a:hover {
 }
 
 /* --- BULLETPROOF ASCII SETTINGS FOR WEBVIEWS --- */
-/* Prevents LinkedIn/In-App browsers from artificially enlarging ASCII text */
-.nav-ascii, .ascii-art, .creature-ascii, .name-ascii, .project-ascii {
+/* Forces strict monospace and prevents variable-width overrides in webviews */
+.nav-ascii, .ascii-art, .creature-ascii, .name-ascii, .project-ascii, .ascii-line, .char {
     -webkit-text-size-adjust: none; 
     text-size-adjust: none;
+    /* The !important flag forces the webview to obey the monospace rule */
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace !important;
+    white-space: pre !important; /* Forces strict spacing preservation */
+    letter-spacing: normal !important; /* Prevents webviews from adjusting letter gaps */
+    word-spacing: normal !important;
+    font-variant-ligatures: none !important; /* Prevents characters from combining visually */
+}
+
+/* Hide scrollbars for a cleaner look */
+.nav-ascii, .ascii-art, .creature-ascii, .name-ascii, .project-ascii {
     max-width: 100%;
-    overflow-x: auto; /* Fallback safety so it never breaks layout */
+    overflow-x: auto; 
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE/Edge */
 }
@@ -126,8 +134,6 @@ a:hover {
     font-size: clamp(2px, 0.6vw, 4px);
     line-height: 1.1; 
     color: #e6c106;
-    font-family: 'Courier New', Courier, monospace;
-    white-space: pre;
     cursor: default;
     user-select: none;
     -webkit-user-select: none;
@@ -136,7 +142,7 @@ a:hover {
 
 /* Interactive KOTAG ASCII */
 .ascii-art {
-    font-size: clamp(3px, 1.2vw, 10px); /* Shrunk further to fit mobile */
+    font-size: clamp(3px, 1.2vw, 10px); 
     font-weight: bold;
     line-height: 1.2;
     margin-bottom: 20px;
@@ -148,24 +154,20 @@ a:hover {
 
 .ascii-line {
     display: block;
-    white-space: pre;
 }
 
 .char {
     display: inline-block;
-    white-space: pre;
     transition: transform 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
     will-change: transform;
 }
 
 /* Static Creature ASCII (The Cat) */
 .creature-ascii {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: clamp(2px, 0.8vw, 10px); /* Aggressive scaling to prevent cutting */
+    font-size: clamp(2px, 0.8vw, 10px); 
     font-weight: bold;
     line-height: 1.1;
     margin-bottom: 0;
-    white-space: pre;
     color: #111111;
     cursor: default;
     user-select: none;
@@ -180,7 +182,6 @@ a:hover {
     line-height: 1;
     margin-bottom: 15px;
     color: #111111;
-    white-space: pre;
     user-select: none;
     pointer-events: none;
 }
@@ -200,7 +201,7 @@ a:hover {
     justify-content: space-between;
     align-items: center;
     min-height: 60vh;
-    min-height: 60dvh; /* Better calculation for mobile browsers with toolbars */
+    min-height: 60dvh; 
     margin-bottom: clamp(40px, 8vw, 80px);
     margin-top: clamp(20px, 5vw, 40px);
     width: 100%;
@@ -247,7 +248,7 @@ section {
 }
 
 pre {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; /* Consistent fallback */
     white-space: pre;
     line-height: 1.2;
     margin-bottom: 20px;
@@ -550,7 +551,7 @@ footer {
 @media (max-width: 1024px) {
     .hero {
         flex-direction: column;
-        align-items: center; /* Centered everything for structural stability */
+        align-items: center; 
         gap: 30px;
     }
     .hero-left { 
@@ -560,7 +561,7 @@ footer {
     .hero-right {
         margin-top: 0;
         width: 100%;
-        margin-left: 0; /* CRITICAL FIX: Removed negative margin that cut the cat */
+        margin-left: 0; 
         justify-content: center;
     }
 }
