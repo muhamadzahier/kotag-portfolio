@@ -10,20 +10,25 @@ body {
     color: #111111;
     font-family: 'Courier New', Courier, monospace;
     line-height: 1.6;
+    font-size: clamp(14px, 2vw, 16px); /* Dynamic Base Font */
     width: 100%; 
-    padding: 80px 5vw 40px; /* Added top padding to account for fixed header */
+    padding: clamp(60px, 10vw, 80px) 5vw 40px; /* Dynamic padding */
     overflow-x: hidden;
 }
 
-/* Typography & Links */
+/* Typography & Links - Dynamically scaled headers */
 h1, h2, h3 {
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: clamp(10px, 2vw, 15px);
     text-transform: lowercase;
 }
 
+h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); }
+h2 { font-size: clamp(1.2rem, 4vw, 1.8rem); }
+h3 { font-size: clamp(1rem, 3vw, 1.3rem); }
+
 p {
-    margin-bottom: 15px;
+    margin-bottom: clamp(10px, 2vw, 15px);
     max-width: 1200px; 
 }
 
@@ -49,18 +54,17 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 5vw;
+    padding: clamp(8px, 1.5vw, 10px) 5vw; /* Dynamic padding */
     z-index: 1000;
     box-shadow: 0 4px 0px rgba(0,0,0,0.1);
 }
 
 .nav-brand {
     font-weight: bold;
-    font-size: 1.1rem;
-    overflow: hidden; /* Extra safety to prevent container scroll */
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem); /* Dynamic brand size */
+    overflow: hidden; 
 }
 
-/* Fix for the top nav logo background */
 .nav-brand a {
     display: block;
     background: transparent !important;
@@ -71,11 +75,11 @@ a:hover {
     background: transparent !important;
 }
 
-/* Make the ASCII act like a small, uncopyable image with no scrollbars */
+/* Dynamically scaling Nav ASCII */
 .nav-ascii {
     margin: 0; 
     padding: 0;
-    font-size: 0.22rem; /* Reduced significantly to make it much smaller */
+    font-size: clamp(0.1rem, 0.8vw, 0.22rem);
     line-height: 1.1; 
     color: #e6c106;
     font-family: 'Courier New', Courier, monospace;
@@ -83,20 +87,22 @@ a:hover {
     cursor: default;
     user-select: none;
     -webkit-user-select: none;
-    pointer-events: none; /* Prevents highlighting and interaction */
-    overflow: hidden; /* Completely removes vertical and horizontal scrollbars */
+    pointer-events: none; 
+    overflow: hidden; 
 }
 
 .top-nav nav ul {
     list-style: none;
     display: flex;
-    gap: 25px;
+    gap: clamp(10px, 3vw, 25px); /* Dynamic gap for mobile */
 }
 
+/* Fixed Header Tabs (Nav Links) */
 .top-nav nav ul li a {
     color: #ffffff;
-    font-size: 0.95rem;
+    font-size: clamp(0.75rem, 1.8vw, 0.95rem); /* Prevents giant text on mobile */
     transition: color 0.2s;
+    white-space: nowrap;
 }
 
 .top-nav nav ul li a:hover {
@@ -113,10 +119,10 @@ a:hover {
     justify-content: space-between;
     align-items: center;
     min-height: 60vh;
-    margin-bottom: 80px;
-    margin-top: 40px;
+    margin-bottom: clamp(40px, 8vw, 80px);
+    margin-top: clamp(20px, 5vw, 40px);
     width: 100%;
-    gap: 40px;
+    gap: clamp(20px, 4vw, 40px);
 }
 
 .hero-left {
@@ -140,15 +146,15 @@ a:hover {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    font-size: 0.8rem;
+    font-size: clamp(0.6rem, 1.8vw, 0.8rem); /* Dynamic tagline */
     margin-top: -10px;
     margin-bottom: 20px;
     color: #555555;
 }
 
-/* Interactive KOTAG ASCII */
+/* Interactive KOTAG ASCII dynamically scaled */
 .ascii-art {
-    font-size: 0.8rem;
+    font-size: clamp(0.3rem, 1.8vw, 0.8rem);
     font-weight: bold;
     line-height: 1.2;
     margin-bottom: 20px;
@@ -170,10 +176,10 @@ a:hover {
     will-change: transform;
 }
 
-/* Static Creature ASCII */
+/* Static Creature ASCII (The Cat) - Perfectly scaled to prevent cutting */
 .creature-ascii {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 0.95rem; 
+    font-size: clamp(0.1rem, 0.95vw, 0.95rem); 
     font-weight: bold;
     line-height: 1.1;
     margin-bottom: 0;
@@ -185,17 +191,18 @@ a:hover {
     pointer-events: none;
     overflow: hidden;
     max-width: 100%;
+    display: block;
 }
 
 .subtitle {
     min-height: 1.6em;
-    font-size: 1rem;
+    font-size: clamp(0.85rem, 2.5vw, 1rem); /* Dynamic subtitle */
     margin-top: 10px;
 }
 
 /* Sections */
 section {
-    margin-bottom: 80px;
+    margin-bottom: clamp(40px, 8vw, 80px);
     width: 100%;
 }
 
@@ -210,14 +217,26 @@ pre {
 /* Terminal Text Block Style */
 .terminal-block .block-content {
     border-left: 4px solid #111111;
-    padding-left: 15px;
+    padding-left: clamp(10px, 2vw, 15px);
+}
+
+/* Small unique name ASCII dynamically scaled */
+.name-ascii {
+    font-size: clamp(0.15rem, 1.2vw, 0.28rem); 
+    line-height: 1;
+    margin-bottom: 15px;
+    color: #111111;
+    white-space: pre;
+    overflow-x: hidden; 
+    user-select: none;
+    pointer-events: none;
 }
 
 /* --- STYLISH PROJECT WINDOWS --- */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 80vw, 320px), 1fr));
+    gap: clamp(20px, 4vw, 40px);
     width: 100%;
     align-items: stretch;
 }
@@ -239,15 +258,15 @@ pre {
 .window-header {
     background: #111111;
     color: #ffffff;
-    padding: 8px 15px;
+    padding: clamp(5px, 1.5vw, 8px) clamp(10px, 2vw, 15px);
     display: flex;
     align-items: center;
     border-bottom: 2px solid #111111;
 }
 
 .window-header .dot {
-    width: 10px;
-    height: 10px;
+    width: clamp(6px, 1.5vw, 10px);
+    height: clamp(6px, 1.5vw, 10px);
     background: #ffffff;
     border-radius: 50%;
     margin-right: 6px;
@@ -256,13 +275,13 @@ pre {
 
 .window-title {
     margin-left: 10px;
-    font-size: 0.85rem;
+    font-size: clamp(0.7rem, 2vw, 0.85rem); /* Dynamic window title */
     font-weight: bold;
     letter-spacing: 1px;
 }
 
 .window-body {
-    padding: 20px;
+    padding: clamp(15px, 3vw, 20px);
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -274,10 +293,11 @@ pre {
 }
 
 .mt-auto { margin-top: auto; }
-.mt-2 { margin-top: 20px; }
+.mt-2 { margin-top: clamp(10px, 3vw, 20px); }
 
+/* Dynamic Project ASCII */
 .project-ascii {
-    font-size: 0.5rem; 
+    font-size: clamp(0.25rem, 1.5vw, 0.5rem); 
     margin-bottom: 15px;
     color: #111111;
     font-weight: bold;
@@ -287,7 +307,7 @@ pre {
     font-style: italic;
     color: #555555;
     margin-bottom: 10px;
-    font-size: 0.9rem;
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
 }
 
 .feature-list {
@@ -297,7 +317,7 @@ pre {
 }
 
 .feature-list li {
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
     margin-bottom: 5px;
 }
 
@@ -306,8 +326,8 @@ pre {
     margin-top: 15px;
     background: #111111;
     color: #ffffff;
-    padding: 8px 15px;
-    font-size: 0.9rem;
+    padding: clamp(6px, 1.5vw, 8px) clamp(10px, 2vw, 15px);
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
     text-align: center;
 }
 
@@ -316,7 +336,6 @@ pre {
     color: #ffffff;
 }
 
-/* Fix for transparent image links (like Uptodown button) */
 a.download-badge {
     display: inline-block;
     margin-top: 15px;
@@ -330,7 +349,7 @@ a.download-badge:hover {
 }
 
 a.download-badge img {
-    height: 45px;
+    height: clamp(35px, 6vw, 45px); /* Dynamic image size */
     display: block;
 }
 
@@ -338,7 +357,7 @@ a.download-badge img {
 .carousel-container {
     position: relative;
     width: 100%;
-    height: 350px; 
+    height: clamp(200px, 40vw, 350px); /* Dynamic height */
     border: 1px dashed #111111;
     overflow: hidden;
     background: transparent;
@@ -373,11 +392,11 @@ a.download-badge img {
     background: #111111;
     color: #ffffff;
     border: none;
-    padding: 8px 12px;
+    padding: clamp(6px, 1.5vw, 8px) clamp(8px, 2vw, 12px);
     cursor: pointer;
     font-family: monospace;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     z-index: 10;
     opacity: 0.8;
 }
@@ -406,14 +425,15 @@ a.download-badge img {
 
 .modal-content {
     background-color: #ffffff;
-    padding: 20px;
-    border: 4px solid #111111; 
+    padding: clamp(10px, 3vw, 20px);
+    border: clamp(2px, 0.5vw, 4px) solid #111111; 
     max-width: 90vw;
     max-height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 12px 12px 0px #000000; 
+    position: relative; /* Context for close button */
 }
 
 #modal-img {
@@ -422,12 +442,13 @@ a.download-badge img {
     object-fit: contain;
 }
 
+/* Dynamic Image Modal [ X ] Button */
 .close-modal {
     position: absolute;
-    top: 30px;
-    right: 40px;
+    top: clamp(15px, 4vw, 30px);
+    right: clamp(20px, 5vw, 40px);
     color: #ffffff;
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 5vw, 2.5rem); /* Perfectly scales down on mobile */
     font-weight: bold;
     cursor: pointer;
     font-family: monospace;
@@ -446,7 +467,7 @@ a.download-badge img {
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-    padding: 60px 5vw;
+    padding: clamp(40px, 8vw, 60px) 5vw;
     border-top: 2px dashed #111111;
     border-bottom: 2px dashed #111111;
     background-color: #ffffff;
@@ -468,11 +489,13 @@ a.download-badge img {
     color: #ffffff;
     padding: 5px 15px;
     font-weight: bold;
+    font-size: clamp(0.8rem, 2vw, 1rem);
 }
 
 .terminal-body-content {
-    padding: 20px;
-    min-height: 150px;
+    padding: clamp(15px, 3vw, 20px);
+    min-height: clamp(100px, 20vw, 150px);
+    font-size: clamp(0.8rem, 2vw, 1rem);
 }
 
 .prompt {
@@ -492,7 +515,7 @@ a.download-badge img {
 
 .hint {
     margin-top: 15px;
-    font-size: 0.9rem;
+    font-size: clamp(0.7rem, 2vw, 0.9rem);
     font-style: italic;
     opacity: 0.7;
 }
@@ -501,7 +524,7 @@ a.download-badge img {
 footer {
     padding-top: 20px;
     text-align: left;
-    font-size: 0.9rem;
+    font-size: clamp(0.7rem, 2vw, 0.9rem);
     margin-top: 40px;
 }
 
@@ -522,30 +545,9 @@ footer {
 @media (max-width: 768px) {
     .top-nav {
         flex-direction: column;
-        gap: 15px;
-        padding-bottom: 15px;
+        gap: 5px; /* Tighter gap on small screens */
+        padding-bottom: 10px;
     }
     body { padding-top: 120px; }
-    .ascii-art { font-size: 0.5rem; }
-    .creature-ascii { font-size: 0.4rem; }
-    .project-ascii { font-size: 0.32rem; }
     .carousel-track img { width: 100%; }
-}
-
-/* Style for the small unique name ASCII */
-.name-ascii {
-    font-size: 0.28rem; /* Keeps it small */
-    line-height: 1;
-    margin-bottom: 15px;
-    color: #111111;
-    white-space: pre;
-    overflow-x: hidden; /* Prevents unwanted scrollbars */
-    user-select: none;
-    pointer-events: none;
-}
-
-@media (max-width: 768px) {
-    .name-ascii {
-        font-size: 0.15rem; /* Shrinks even further on mobile */
-    }
 }
