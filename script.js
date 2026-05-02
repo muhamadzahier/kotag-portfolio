@@ -29,8 +29,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const chars = kotagEl.querySelectorAll('.char');
         const hero = document.querySelector('.hero');
 
-        const RADIUS = 75; 
-        const MAX_PUSH = 15;
+        // Dynamic Push Radius for Mobile vs Desktop
+        const RADIUS = window.innerWidth <= 768 ? 40 : 75; 
+        const MAX_PUSH = window.innerWidth <= 768 ? 8 : 15;
 
         hero.addEventListener('mousemove', (e) => {
             const mouseX = e.clientX;

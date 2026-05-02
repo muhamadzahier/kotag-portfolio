@@ -5,14 +5,19 @@
     box-sizing: border-box;
 }
 
+html, body {
+    -webkit-text-size-adjust: 100%; /* Normalize standard text sizing in webviews */
+}
+
 body {
     background-color: #ffffff;
     color: #111111;
     font-family: 'Courier New', Courier, monospace;
-    line-height: 1.6;
-    font-size: clamp(14px, 2vw, 16px); /* Dynamic Base Font */
+    /* Reduced base font size slightly to fix "words seem big" on mobile */
+    font-size: clamp(12px, 2.5vw, 16px); 
     width: 100%; 
-    padding: clamp(60px, 10vw, 80px) 5vw 40px; /* Dynamic padding */
+    max-width: 100vw;
+    padding: clamp(60px, 10vw, 80px) 5vw 40px; 
     overflow-x: hidden;
 }
 
@@ -23,9 +28,9 @@ h1, h2, h3 {
     text-transform: lowercase;
 }
 
-h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); }
-h2 { font-size: clamp(1.2rem, 4vw, 1.8rem); }
-h3 { font-size: clamp(1rem, 3vw, 1.3rem); }
+h1 { font-size: clamp(1.5rem, 5vw, 2.2rem); }
+h2 { font-size: clamp(1.1rem, 4vw, 1.6rem); }
+h3 { font-size: clamp(0.9rem, 3vw, 1.2rem); }
 
 p {
     margin-bottom: clamp(10px, 2vw, 15px);
@@ -54,14 +59,14 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: clamp(8px, 1.5vw, 10px) 5vw; /* Dynamic padding */
+    padding: clamp(8px, 1.5vw, 10px) 5vw; 
     z-index: 1000;
     box-shadow: 0 4px 0px rgba(0,0,0,0.1);
 }
 
 .nav-brand {
     font-weight: bold;
-    font-size: clamp(0.9rem, 2.5vw, 1.1rem); /* Dynamic brand size */
+    font-size: clamp(0.8rem, 2.5vw, 1rem); 
     overflow: hidden; 
 }
 
@@ -75,32 +80,17 @@ a:hover {
     background: transparent !important;
 }
 
-/* Dynamically scaling Nav ASCII */
-.nav-ascii {
-    margin: 0; 
-    padding: 0;
-    font-size: clamp(0.1rem, 0.8vw, 0.22rem);
-    line-height: 1.1; 
-    color: #e6c106;
-    font-family: 'Courier New', Courier, monospace;
-    white-space: pre;
-    cursor: default;
-    user-select: none;
-    -webkit-user-select: none;
-    pointer-events: none; 
-    overflow: hidden; 
-}
-
 .top-nav nav ul {
     list-style: none;
     display: flex;
-    gap: clamp(10px, 3vw, 25px); /* Dynamic gap for mobile */
+    gap: clamp(8px, 2vw, 25px); 
 }
 
 /* Fixed Header Tabs (Nav Links) */
 .top-nav nav ul li a {
     color: #ffffff;
-    font-size: clamp(0.75rem, 1.8vw, 0.95rem); /* Prevents giant text on mobile */
+    /* Shrunk header tabs specifically for mobile */
+    font-size: clamp(0.65rem, 1.5vw, 0.95rem); 
     transition: color 0.2s;
     white-space: nowrap;
 }
@@ -112,6 +102,97 @@ a:hover {
     border-radius: 2px;
 }
 
+/* --- BULLETPROOF ASCII SETTINGS FOR WEBVIEWS --- */
+/* Prevents LinkedIn/In-App browsers from artificially enlarging ASCII text */
+.nav-ascii, .ascii-art, .creature-ascii, .name-ascii, .project-ascii {
+    -webkit-text-size-adjust: none; 
+    text-size-adjust: none;
+    max-width: 100%;
+    overflow-x: auto; /* Fallback safety so it never breaks layout */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+.nav-ascii::-webkit-scrollbar, 
+.ascii-art::-webkit-scrollbar, 
+.creature-ascii::-webkit-scrollbar, 
+.name-ascii::-webkit-scrollbar, 
+.project-ascii::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.nav-ascii {
+    margin: 0; 
+    padding: 0;
+    font-size: clamp(2px, 0.6vw, 4px);
+    line-height: 1.1; 
+    color: #e6c106;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre;
+    cursor: default;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none; 
+}
+
+/* Interactive KOTAG ASCII */
+.ascii-art {
+    font-size: clamp(3px, 1.2vw, 10px); /* Shrunk further to fit mobile */
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    cursor: crosshair;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.ascii-line {
+    display: block;
+    white-space: pre;
+}
+
+.char {
+    display: inline-block;
+    white-space: pre;
+    transition: transform 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
+    will-change: transform;
+}
+
+/* Static Creature ASCII (The Cat) */
+.creature-ascii {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: clamp(2px, 0.8vw, 10px); /* Aggressive scaling to prevent cutting */
+    font-weight: bold;
+    line-height: 1.1;
+    margin-bottom: 0;
+    white-space: pre;
+    color: #111111;
+    cursor: default;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
+    display: block;
+}
+
+/* Small unique name ASCII */
+.name-ascii {
+    font-size: clamp(2.5px, 1vw, 10px); 
+    line-height: 1;
+    margin-bottom: 15px;
+    color: #111111;
+    white-space: pre;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* Dynamic Project ASCII */
+.project-ascii {
+    font-size: clamp(4px, 1.5vw, 8px); 
+    margin-bottom: 15px;
+    color: #111111;
+    font-weight: bold;
+}
+
 /* --- HERO SECTION --- */
 .hero {
     display: flex;
@@ -119,6 +200,7 @@ a:hover {
     justify-content: space-between;
     align-items: center;
     min-height: 60vh;
+    min-height: 60dvh; /* Better calculation for mobile browsers with toolbars */
     margin-bottom: clamp(40px, 8vw, 80px);
     margin-top: clamp(20px, 5vw, 40px);
     width: 100%;
@@ -146,57 +228,15 @@ a:hover {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    font-size: clamp(0.6rem, 1.8vw, 0.8rem); /* Dynamic tagline */
+    font-size: clamp(0.55rem, 1.5vw, 0.8rem); 
     margin-top: -10px;
     margin-bottom: 20px;
     color: #555555;
 }
 
-/* Interactive KOTAG ASCII dynamically scaled */
-.ascii-art {
-    font-size: clamp(0.3rem, 1.8vw, 0.8rem);
-    font-weight: bold;
-    line-height: 1.2;
-    margin-bottom: 20px;
-    cursor: crosshair;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.ascii-line {
-    display: block;
-    white-space: pre;
-}
-
-.char {
-    display: inline-block;
-    white-space: pre;
-    transition: transform 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
-    will-change: transform;
-}
-
-/* Static Creature ASCII (The Cat) - Perfectly scaled to prevent cutting */
-.creature-ascii {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: clamp(0.1rem, 0.95vw, 0.95rem); 
-    font-weight: bold;
-    line-height: 1.1;
-    margin-bottom: 0;
-    white-space: pre;
-    color: #111111;
-    cursor: default;
-    user-select: none;
-    -webkit-user-select: none;
-    pointer-events: none;
-    overflow: hidden;
-    max-width: 100%;
-    display: block;
-}
-
 .subtitle {
     min-height: 1.6em;
-    font-size: clamp(0.85rem, 2.5vw, 1rem); /* Dynamic subtitle */
+    font-size: clamp(0.8rem, 2vw, 1rem); 
     margin-top: 10px;
 }
 
@@ -209,7 +249,6 @@ section {
 pre {
     font-family: 'Courier New', Courier, monospace;
     white-space: pre;
-    overflow-x: auto;
     line-height: 1.2;
     margin-bottom: 20px;
 }
@@ -218,18 +257,6 @@ pre {
 .terminal-block .block-content {
     border-left: 4px solid #111111;
     padding-left: clamp(10px, 2vw, 15px);
-}
-
-/* Small unique name ASCII dynamically scaled */
-.name-ascii {
-    font-size: clamp(0.15rem, 1.2vw, 0.28rem); 
-    line-height: 1;
-    margin-bottom: 15px;
-    color: #111111;
-    white-space: pre;
-    overflow-x: hidden; 
-    user-select: none;
-    pointer-events: none;
 }
 
 /* --- STYLISH PROJECT WINDOWS --- */
@@ -275,7 +302,7 @@ pre {
 
 .window-title {
     margin-left: 10px;
-    font-size: clamp(0.7rem, 2vw, 0.85rem); /* Dynamic window title */
+    font-size: clamp(0.7rem, 2vw, 0.85rem); 
     font-weight: bold;
     letter-spacing: 1px;
 }
@@ -294,14 +321,6 @@ pre {
 
 .mt-auto { margin-top: auto; }
 .mt-2 { margin-top: clamp(10px, 3vw, 20px); }
-
-/* Dynamic Project ASCII */
-.project-ascii {
-    font-size: clamp(0.25rem, 1.5vw, 0.5rem); 
-    margin-bottom: 15px;
-    color: #111111;
-    font-weight: bold;
-}
 
 .status-text {
     font-style: italic;
@@ -349,7 +368,7 @@ a.download-badge:hover {
 }
 
 a.download-badge img {
-    height: clamp(35px, 6vw, 45px); /* Dynamic image size */
+    height: clamp(35px, 6vw, 45px); 
     display: block;
 }
 
@@ -357,7 +376,7 @@ a.download-badge img {
 .carousel-container {
     position: relative;
     width: 100%;
-    height: clamp(200px, 40vw, 350px); /* Dynamic height */
+    height: clamp(200px, 40vw, 350px); 
     border: 1px dashed #111111;
     overflow: hidden;
     background: transparent;
@@ -433,7 +452,7 @@ a.download-badge img {
     justify-content: center;
     align-items: center;
     box-shadow: 12px 12px 0px #000000; 
-    position: relative; /* Context for close button */
+    position: relative; 
 }
 
 #modal-img {
@@ -442,13 +461,12 @@ a.download-badge img {
     object-fit: contain;
 }
 
-/* Dynamic Image Modal [ X ] Button */
 .close-modal {
     position: absolute;
     top: clamp(15px, 4vw, 30px);
     right: clamp(20px, 5vw, 40px);
     color: #ffffff;
-    font-size: clamp(1.5rem, 5vw, 2.5rem); /* Perfectly scales down on mobile */
+    font-size: clamp(1.2rem, 4vw, 2.5rem); 
     font-weight: bold;
     cursor: pointer;
     font-family: monospace;
@@ -489,13 +507,13 @@ a.download-badge img {
     color: #ffffff;
     padding: 5px 15px;
     font-weight: bold;
-    font-size: clamp(0.8rem, 2vw, 1rem);
+    font-size: clamp(0.7rem, 2vw, 1rem);
 }
 
 .terminal-body-content {
     padding: clamp(15px, 3vw, 20px);
     min-height: clamp(100px, 20vw, 150px);
-    font-size: clamp(0.8rem, 2vw, 1rem);
+    font-size: clamp(0.7rem, 2vw, 1rem);
 }
 
 .prompt {
@@ -515,7 +533,7 @@ a.download-badge img {
 
 .hint {
     margin-top: 15px;
-    font-size: clamp(0.7rem, 2vw, 0.9rem);
+    font-size: clamp(0.65rem, 1.8vw, 0.9rem);
     font-style: italic;
     opacity: 0.7;
 }
@@ -524,7 +542,7 @@ a.download-badge img {
 footer {
     padding-top: 20px;
     text-align: left;
-    font-size: clamp(0.7rem, 2vw, 0.9rem);
+    font-size: clamp(0.65rem, 1.8vw, 0.9rem);
     margin-top: 40px;
 }
 
@@ -532,20 +550,25 @@ footer {
 @media (max-width: 1024px) {
     .hero {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center; /* Centered everything for structural stability */
+        gap: 30px;
     }
-    .hero-left { max-width: 100%; }
-    .hero-right {
-        margin-top: 40px;
+    .hero-left { 
+        max-width: 100%; 
         width: 100%;
-        margin-left: 0;
+    }
+    .hero-right {
+        margin-top: 0;
+        width: 100%;
+        margin-left: 0; /* CRITICAL FIX: Removed negative margin that cut the cat */
+        justify-content: center;
     }
 }
 
 @media (max-width: 768px) {
     .top-nav {
         flex-direction: column;
-        gap: 5px; /* Tighter gap on small screens */
+        gap: 5px; 
         padding-bottom: 10px;
     }
     body { padding-top: 120px; }
