@@ -102,13 +102,13 @@ a:hover {
     border-radius: 2px;
 }
 
-/* --- BULLETPROOF ASCII SETTINGS FOR WEBVIEWS --- */
-/* Strict OS monospace + tabular-nums guarantees math symbols (×, ≠, ∞, ÷) stay perfectly aligned */
+/* --- BULLETPROOF ASCII SETTINGS FOR WEBVIEWS & CHROME MOBILE --- */
+/* Strict OS monospace + relative line height prevents ALL overlapping */
 .nav-ascii, .ascii-art, .creature-ascii, .name-ascii, .project-ascii, .char {
     font-family: ui-monospace, "SF Mono", SFMono-Regular, "Roboto Mono", Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
     font-variant-numeric: tabular-nums !important; 
     white-space: pre !important;
-    line-height: 1.1 !important;
+    line-height: 1.2em !important; /* CRITICAL FIX: 1.2em forces line height to perfectly scale with dynamic font size */
     letter-spacing: 0 !important;
     word-spacing: 0 !important;
     -webkit-text-size-adjust: none !important;
@@ -126,15 +126,26 @@ a:hover {
     display: none; 
 }
 
-/* Desktop Base Sizes (Specific pixels avoid scaling glitches) */
-.nav-ascii { font-size: 4px; color: #e6c106; pointer-events: none; }
-.ascii-art { font-size: 10px; font-weight: bold; cursor: crosshair; margin-bottom: 20px; user-select: none; }
-.creature-ascii { font-size: 8px; font-weight: bold; color: #111111; pointer-events: none; }
-.name-ascii { font-size: 5px; color: #111111; pointer-events: none; margin-bottom: 15px;}
-.project-ascii { font-size: 6px; font-weight: bold; color: #111111; margin-bottom: 15px; }
+/* Deeply dynamic clamp sizing prevents the need for buggy zooms */
+.nav-ascii { font-size: clamp(3px, 0.6vw, 5px); color: #e6c106; pointer-events: none; }
+.ascii-art { font-size: clamp(4px, 1.5vw, 10px); font-weight: bold; cursor: crosshair; margin-bottom: 20px; user-select: none; }
+.creature-ascii { font-size: clamp(3px, 0.8vw, 8px); font-weight: bold; color: #111111; pointer-events: none; }
+.name-ascii { font-size: clamp(3px, 0.8vw, 6px); color: #111111; pointer-events: none; margin-bottom: 15px;}
+.project-ascii { font-size: clamp(4px, 1.2vw, 8px); font-weight: bold; color: #111111; margin-bottom: 15px; }
 
-.ascii-line { display: block; white-space: pre; }
-.char { display: inline-block; white-space: pre; transition: transform 0.1s cubic-bezier(0.25, 0.8, 0.25, 1); will-change: transform; }
+/* CRITICAL FIX: Forces line to stretch fully, preventing spans from stacking/overlapping */
+.ascii-line { 
+    display: block; 
+    white-space: pre; 
+    width: max-content; 
+}
+
+.char { 
+    display: inline-block; 
+    white-space: pre; 
+    transition: transform 0.1s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    will-change: transform; 
+}
 
 /* --- HERO SECTION --- */
 .hero {
@@ -489,7 +500,7 @@ footer {
     margin-top: 40px;
 }
 
-/* Responsive adjustments & Webview Zoom Overrides */
+/* Responsive adjustments */
 @media (max-width: 1024px) {
     .hero {
         flex-direction: column;
@@ -516,10 +527,4 @@ footer {
     }
     body { padding-top: 120px; }
     .carousel-track img { width: 100%; }
-
-    .nav-ascii { font-size: 8px !important; zoom: 0.35; }
-    .ascii-art { font-size: 10px !important; zoom: 0.6; }
-    .creature-ascii { font-size: 10px !important; zoom: 0.35; }
-    .name-ascii { font-size: 8px !important; zoom: 0.45; }
-    .project-ascii { font-size: 8px !important; zoom: 0.65; }
 }
